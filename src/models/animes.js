@@ -1,4 +1,4 @@
-import { nanoid } from 'nanoid'
+import { v4 as uuid } from 'uuid'
 
 const animes = []
 
@@ -9,7 +9,7 @@ export const getAnime = (id) => {
 }
 
 export const createAnime = (anime) => {
-  const id = nanoid()
+  const id = uuid()
   animes.push({ id, ...anime })
   return getAnime(id)
 }
