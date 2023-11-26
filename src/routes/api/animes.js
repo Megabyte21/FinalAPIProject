@@ -1,25 +1,38 @@
 import { Router } from 'express'
 
+import {
+  getAnime,
+  getAnimes,
+  createAnime,
+  updateAnime,
+  deleteAnime,
+} from '../../models/animes'
+
 const router = Router()
 
 router.get('/', (req, res) => {
-  res.send({ msg: 'Get all Animes' })
+  const animes = getAnimes()
+  res.send(animes)
 })
 
 router.get('/:id', (req, res) => {
-  res.send({ msg: `Getting Anime ${req.params.id}` })
+  const anime = getAnime(req.params.id)
+  res.send(anime)
 })
 
 router.post('/', (req, res) => {
-  res.send({ msg: 'Creating a New Anime' })
+  const newAnime = createAnime(req.body)
+  res.send(newAnime)
 })
 
 router.put('/:id', (req, res) => {
-  res.send({ msg: `Updataing Anime ${req.params.id}` })
+  updateAnime(req.params.id, req.body)
+  res.send({ msg: `Anime ${req.params.id} Updated` })
 })
 
 router.delete('/:id', (req, res) => {
-  res.send({ msg: `Deleting Anime ${req.params.id}` })
+  deleteAnime(req.params.id)
+  res.send({ msg: `Anime ${req.params.id} Deleted` })
 })
 
 export default router
