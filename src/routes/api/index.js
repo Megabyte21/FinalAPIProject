@@ -1,25 +1,19 @@
-import { Router } from "express"
+import { Router } from 'express'
 import basicAuth from 'express-basic-auth'
 
-import persons from "./persons"
-import companies from "./companies"
-import departments from "./departments"
-import employees from "./employees"
+import animes from './animes'
 const router = Router()
 
-router.use(basicAuth({
-    users: {[process.env.ADMIN_USER]: process.env.ADMIN_PASSWORD}
-}),
+router.use(
+  basicAuth({
+    users: { [process.env.ADMIN_USER]: process.env.ADMIN_PASSWORD },
+  }),
 )
 
-
-
 router.get('/', (req, res) => {
-    res.send({msg: 'Inside API enpoints'})
+  res.send({ msg: 'Inside API enpoints' })
 })
 
-router.use('/persons', persons)
-router.use('/companies', companies)
-router.use('/departments', departments)
-router.use('/employees', employees)
+router.use('/animes', animes)
+
 export default router
