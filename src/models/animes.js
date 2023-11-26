@@ -1,33 +1,27 @@
 import { v4 as uuid } from 'uuid'
+import db from '../utils/db'
 
 const animes = []
 
-export const getAnimes = () => animes
+export const getAnimes = async () => db.anime.findMany()
 
 export const getAnime = (id) => {
-  return animes.find((anime) => anime.id === id)
+  return db.anime.findUnique({ where: { animeID: id } })
 }
 
-export const createAnime = (anime) => {
-  const id = uuid()
-  animes.push({ id, ...anime })
-  return getAnime(id)
-}
+export const createAnime = async (name, description) =>
+  db.anime.create({ data: { name, description } })
 
-export const updateAnime = (id, anime) => {
-  const databaseAnime = getAnime(id)
-  if (databaseAnime) {
-    const animeIndex = animes.findIndex((a) => a.id === id)
-    animes[animeIndex] = { id, ...anime }
+export const updateAnime = async (id, animeData) => {
+  const anime = await getAnime(id)
+  if (anime) {
+    return db.anime.update({
+      where: { animeID: id },
+      data: { ...anime, ...animeData, updatedAt: new Date() },
+    })
   }
-  return getAnime(id)
+  return null
 }
 
-export const deleteAnime = (id, anime) => {
-  const animeIndex = animes.findIndex((a) => a.id === id)
-  if (animeIndex != -1) {
-    animes.splice(animeIndex, 1)
-    return true
-  }
-  return false
-}
+export const deleteAnime = async (id) =>
+  db.anime.delete({ where: { animeID: id } })

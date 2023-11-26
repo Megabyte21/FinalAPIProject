@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Anime {
-  animeId     String   @id @default(uuid())
+  animeID     String   @id @default(uuid())
   name        String
   description String
   createdAt   DateTime @default(now())
@@ -19,7 +19,7 @@ model Anime {
 }
 
 model Games {
-  gameId      String   @id @default(uuid())
+  gameID      String   @id @default(uuid())
   name        String
   description String
   rating      String

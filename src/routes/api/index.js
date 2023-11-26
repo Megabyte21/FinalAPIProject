@@ -2,6 +2,7 @@ import { Router } from 'express'
 import basicAuth from 'express-basic-auth'
 
 import animes from './animes'
+import games from './games'
 const router = Router()
 
 router.use(
@@ -15,5 +16,6 @@ router.get('/', (req, res) => {
 })
 
 router.use('/animes', animes)
+router.use('/games', games)
 
 export default router
