@@ -10,32 +10,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Company {
-  companyId   String       @id @default(uuid())
+model Anime {
+  animeId     String   @id @default(uuid())
   name        String
-  departments Department[]
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
-model Department {
-  departmentId String     @id @default(uuid())
-  name         String
-  companyId    String
-  company      Company    @relation(fields: [companyId], references: [companyId])
-  employees    Employee[]
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-}
-
-model Employee {
-  employeeId   String     @id @default(uuid())
-  name         String
-  email        String     @unique
-  title String
-  departmentId String
-  department   Department @relation(fields: [departmentId], references: [departmentId])
-  quote String?
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
+model Games {
+  gameId      String   @id @default(uuid())
+  name        String
+  description String
+  rating      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
