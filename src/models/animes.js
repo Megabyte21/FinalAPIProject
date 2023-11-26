@@ -11,6 +11,7 @@ export const getAnime = (id) => {
 export const createAnime = (anime) => {
   const id = nanoid()
   animes.push({ id, ...anime })
+  return getAnime(id)
 }
 
 export const updateAnime = (id, anime) => {
@@ -19,11 +20,14 @@ export const updateAnime = (id, anime) => {
     const animeIndex = animes.findIndex((a) => a.id === id)
     animes[animeIndex] = { id, ...anime }
   }
+  return getAnime(id)
 }
 
 export const deleteAnime = (id, anime) => {
   const animeIndex = animes.findIndex((a) => a.id === id)
   if (animeIndex != -1) {
     animes.splice(animeIndex, 1)
+    return true
   }
+  return false
 }

@@ -17,22 +17,34 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const anime = getAnime(req.params.id)
-  res.send(anime)
+  if (anime) {
+    res.send(anime)
+  }
+  res.status(404).send({ msg: 'Anime Not Found' })
 })
 
 router.post('/', (req, res) => {
   const newAnime = createAnime(req.body)
-  res.send(newAnime)
+  if (newAnime) {
+    res.status(201).send(newAnime)
+  }
+  res.status(400).send({ msg: 'Bad request' })
 })
 
 router.put('/:id', (req, res) => {
-  updateAnime(req.params.id, req.body)
-  res.send({ msg: `Anime ${req.params.id} Updated` })
+  const updatedAnime = updateAnime(req.params.id, req.body)
+  if (updatedAnime) {
+    res.send(updatedAnime)
+  }
+  res.status(404).send({ msg: 'Anime not found' })
 })
 
 router.delete('/:id', (req, res) => {
-  deleteAnime(req.params.id)
-  res.send({ msg: `Anime ${req.params.id} Deleted` })
+  const deleted = deleteAnime(req.params.id)
+  if (deleted) {
+    res.send({ msg: `Anime ${req.params.id} Deleted` })
+  }
+  res.status(404).send({ msg: 'Anime not found' })
 })
 
 export default router
