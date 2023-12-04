@@ -29,12 +29,14 @@ router.post('/', async (req, res) => {
   const gameDescription = req.body.description
   const gameRating = req.body.rating
   const gamePrice = req.body.price
+  const gamecoverArt = req.body.coverArt
   if (gameName) {
     const game = await createGame(
       gameName,
       gameDescription,
       gameRating,
       gamePrice,
+      gamecoverArt,
     )
     res.send(game)
   } else {
