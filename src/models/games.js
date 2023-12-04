@@ -8,8 +8,8 @@ export const getGames = async () => db.games.findMany()
 export const getGame = async (id) =>
   db.games.findUnique({ where: { gameID: id } })
 
-export const createGame = async (name, description, rating) =>
-  db.games.create({ data: { name, description, rating } })
+export const createGame = async (name, description, rating, price) =>
+  db.games.create({ data: { name, description, rating, price } })
 
 export const updateGame = async (id, gameData) => {
   const game = await getGame(id)

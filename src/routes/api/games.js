@@ -28,8 +28,14 @@ router.post('/', async (req, res) => {
   const gameName = req.body.name
   const gameDescription = req.body.description
   const gameRating = req.body.rating
+  const gamePrice = req.body.price
   if (gameName) {
-    const game = await createGame(gameName, gameDescription, gameRating)
+    const game = await createGame(
+      gameName,
+      gameDescription,
+      gameRating,
+      gamePrice,
+    )
     res.send(game)
   } else {
     res.status(400).send({ msg: 'Game name is required' })

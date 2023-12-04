@@ -27,8 +27,9 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   const animeName = req.body.name
   const animeDescription = req.body.description
+  const animecoverArt = req.body.coverArt
   if (animeName) {
-    const anime = await createAnime(animeName, animeDescription)
+    const anime = await createAnime(animeName, animeDescription, animecoverArt)
     res.send(anime)
   } else {
     res.status(400).send({ msg: 'Anime name is required' })
