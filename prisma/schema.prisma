@@ -14,6 +14,7 @@ model Anime {
   animeID     String   @id @default(uuid())
   name        String
   description String
+  coverArt    String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -22,6 +23,8 @@ model Games {
   gameID      String   @id @default(uuid())
   name        String
   description String
+  coverArt    String
+  price       Int
   rating      String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
