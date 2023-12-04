@@ -9,8 +9,8 @@ export const getAnime = (id) => {
   return db.anime.findUnique({ where: { animeID: id } })
 }
 
-export const createAnime = async (name, description) =>
-  db.anime.create({ data: { name, description } })
+export const createAnime = async (name, description, coverArt) =>
+  db.anime.create({ data: { name, description, coverArt } })
 
 export const updateAnime = async (id, animeData) => {
   const anime = await getAnime(id)
