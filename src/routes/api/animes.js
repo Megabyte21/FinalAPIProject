@@ -11,8 +11,17 @@ import {
 const router = Router()
 
 router.get('/', async (req, res) => {
-  const animes = await getAnimes()
-  res.send(animes)
+  const size = Number(req.query.size) || 10
+  const page = Number(req.query.page) || 1
+  const skip = size * (page - 1)
+  const take = size
+  const { count, animes } = await getAnimes(skip, take)
+  res.set({
+    'X-Total-Count': count,
+    'X-Total-Pages': Math.ceil(count / size),
+  }),
+    res.send(animes)
+  console.log(count)
 })
 
 router.get('/:id', async (req, res) => {

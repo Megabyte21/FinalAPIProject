@@ -3,7 +3,11 @@ import db from '../utils/db'
 
 const animes = []
 
-export const getAnimes = async () => db.anime.findMany()
+export const getAnimes = async (skip, take) => {
+  const count = await db.anime.count()
+  const animes = await db.anime.findMany({ skip, take })
+  return { count, animes }
+}
 
 export const getAnime = (id) => {
   return db.anime.findUnique({ where: { animeID: id } })
